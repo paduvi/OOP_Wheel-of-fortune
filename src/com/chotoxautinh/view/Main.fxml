@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="625.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.AppController">
+   <top>
+      <MenuBar prefHeight="25.0" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <AnchorPane prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../resources/images/background.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER" layoutX="500.0" layoutY="162.0" prefHeight="330.0" prefWidth="290.0" spacing="29.0" styleClass="mainButtonLayout">
+               <children>
+                  <Button defaultButton="true" mnemonicParsing="false" opacity="0.7" prefHeight="47.0" prefWidth="220.0" text="CLASSIC MODE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button defaultButton="true" mnemonicParsing="false" opacity="0.7" prefHeight="47.0" prefWidth="220.0" text="ENDLESS MODE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button defaultButton="true" mnemonicParsing="false" opacity="0.7" prefHeight="47.0" prefWidth="220.0" text="MULTIPLAYER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Label style="-fx-text-fill: #333;" text="Designed by ChoToXauTinh - ©2015 Paduvi.Ltd" translateY="33.0" />
+               </children>
+            </VBox>
+            <ImageView layoutX="738.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../resources/images/rule-button.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
