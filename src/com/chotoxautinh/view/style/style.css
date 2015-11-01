@@ -2,4 +2,9 @@
 
 .mainButtonLayout .button{
 	-fx-font-weight: bold;
+	-fx-focus-traversable: false;
+}
+
+.ruleButton{
+	-fx-focus-traversable: true;
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
-
 
 <BorderPane prefHeight="625.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.AppController">
    <top>
@@ -58,7 +58,7 @@
                   <Label style="-fx-text-fill: #333;" text="Designed by ChoToXauTinh - ©2015 Paduvi.Ltd" translateY="33.0" />
                </children>
             </VBox>
-            <ImageView layoutX="738.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView focusTraversable="true" layoutX="738.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" styleClass="ruleButton">
                <image>
                   <Image url="@../../../../resources/images/rule-button.png" />
                </image>
