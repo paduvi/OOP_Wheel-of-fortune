@@ -1,10 +1,7 @@
 package com.chotoxautinh.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.chotoxautinh.Wheel;
+import com.chotoxautinh.WheelSimulator;
+import com.chotoxautinh.model.Wheel;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -17,8 +14,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.transform.Rotate;
 
 public class WheelController {
 
@@ -34,34 +29,23 @@ public class WheelController {
 
 	private final long DELAY = 1000 / 60;
 	private long beforeTime;
-	private double wheelAngle = 0;
-	private double omega = 0;
-	private double anpha = 0;
-	private List<Pile> pileList = new ArrayList<Pile>();
-	private Wheel mainApp;
-	private Image wheel;
+	private WheelSimulator mainApp;
+	private Wheel wheel;
 	private Image arrow;
 	private GraphicsContext gc;
 	private boolean ready;
 	private Point2D origin;
-	private Circle wheelShape;
 	private int direction = NONE;
-	private double startAngle;
-	private long[] timeArray = new long[360];
+	private double powerProgress;
 
-	public void setMainApp(Wheel mainApp) {
+	public void setMainApp(WheelSimulator mainApp) {
 		this.mainApp = mainApp;
 	}
 
 	@FXML
 	private void initialize() {
-		Collections.addAll(pileList, Pile.FOUR_HUNDRED, Pile.TWO_THOUSAND, Pile.THREE_HUNDRED, Pile.SEVEN_HUNDRED,
-				Pile.LOST_TURN, Pile.SIX_HUNDRED, Pile.ZERO, Pile.FIVE_HUNDRED, Pile.ONE_HUNDRED, Pile.FREE_SPIN,
-				Pile.TWO_HUNDRED, Pile.THREE_HUNDRED, Pile.SURPRISE, Pile.NINE_HUNDRED, Pile.EIGHT_HUNDRED,
-				Pile.BANKRUPT, Pile.ONE_HUNDRED, Pile.TWO_HUNDRED, Pile.NINE_HUNDRED, Pile.THREE_HUNDRED);
 		gc = canvas.getGraphicsContext2D();
-		wheel = new Image("file:resources/images/non.png", 350, 0, true, true);
-		wheelShape = new Circle(350 / 2, 20 + 350 / 2, 350 / 2);
+		wheel = new Wheel(175, 195, 350, 350);
 		arrow = new Image("file:resources/images/arrow.png", 0, 25, true, true);
 		canvas.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
@@ -79,7 +63,7 @@ public class WheelController {
 				sleep = DELAY * 1000 - timeDiff;
 
 				if (sleep < 0) {
-
+					powerBar.setProgress(powerProgress);
 					rotateWheel();
 					paint(gc);
 
@@ -111,136 +95,108 @@ public class WheelController {
 	private void paint(GraphicsContext gc) {
 		clearBackground(gc);
 
-		drawRotatedImage(gc, wheel, wheelAngle, 0, 20);
+		wheel.drawRotatedImage(gc);
 
 		gc.setFill(Color.BLACK);
-		gc.fillText("Omega: " + omega, 10, 400);
-		int i = (int) getDegreeFromNumber(wheelAngle) * pileList.size() / 360;
-		gc.fillText("Pile: " + pileList.get(i).getPile(), 10, 425);
+		gc.fillText("Omega: " + wheel.getSpeed(), 10, 400);
+		gc.fillText("Pile: " + wheel.getPile().getLabel(), 10, 425);
+		gc.fillText("Curdir: " + direction, 200, 400);
+		gc.fillText("Power Progress: " + powerProgress, 200, 425);
 
-		gc.drawImage(arrow, (canvas.getWidth() - arrow.getWidth()) / 2 - 1, 0);
-	}
-
-	private int getDegreeFromNumber(double number) {
-		int div = (int) number / 360;
-		int mod = (int) number - 360 * div;
-		if (mod < 0)
-			mod += 360;
-		return mod;
+		gc.drawImage(arrow, (canvas.getWidth() - arrow.getWidth()) / 2 - 2, 0);
 	}
 
 	private void rotateWheel() {
 
-		if (omega <= 0) {
-			powerBar.setProgress(0);
-			omega = 0;
-			anpha = 0;
+		powerBar.setProgress(powerProgress);
+		if (wheel.getSpeed() <= 0) {
+			wheel.setSpeed(0);
+			wheel.setAcceleration(0);
+			if (ready == false) {
+				origin = null;
+				powerProgress = 0;
+				direction = NONE;
+			}
 			ready = true;
 			return;
 		}
-		omega -= anpha;
-		wheelAngle = wheelAngle + direction * omega;
-	}
-
-	private void rotate(GraphicsContext gc, double angle, double px, double py) {
-		Rotate r = new Rotate(angle, px, py);
-		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-	}
-
-	/**
-	 * Draws an image on a graphics context.
-	 *
-	 * The image is drawn at (tlpx, tlpy) rotated by angle pivoted around the
-	 * point: (tlpx + image.getWidth() / 2, tlpy + image.getHeight() / 2)
-	 *
-	 * @param gc
-	 *            the graphics context the image is to be drawn on.
-	 * @param angle
-	 *            the angle of rotation.
-	 * @param tlpx
-	 *            the top left x co-ordinate where the image will be plotted (in
-	 *            canvas co-ordinates).
-	 * @param tlpy
-	 *            the top left y co-ordinate where the image will be plotted (in
-	 *            canvas co-ordinates).
-	 */
-	private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double tlpx, double tlpy) {
-		gc.save(); // saves the current state on stack, including the current
-					// transform
-		rotate(gc, angle, tlpx + image.getWidth() / 2, tlpy + image.getHeight() / 2);
-		gc.drawImage(image, tlpx, tlpy);
-		gc.restore(); // back to original state (before rotation)
+		if (wheel.getAcceleration() < 0)
+			wheel.setAcceleration(-2E-2);
+		else
+			wheel.setAcceleration(wheel.getAcceleration() - 5E-4);
+		wheel.setSpeed(wheel.getSpeed() + wheel.getAcceleration());
+		wheel.setAngle(wheel.getAngle() - direction * wheel.getSpeed());
 	}
 
 	private void actionMouseDragged(MouseEvent me) {
 		if (ready) {
-			int originDirection = direction;
 			if (origin == null)
 				origin = new Point2D(me.getX(), me.getY());
 			Point2D current = new Point2D(me.getX(), me.getY());
 
-			Point2D originVector = origin.subtract(wheelShape.getCenterX(), wheelShape.getCenterY());
+			Point2D originVector = origin.subtract(wheel.getCenterX(), wheel.getCenterY());
 			double originAngle;
-			if (origin.getY() < wheelShape.getCenterY()) {
+			if (origin.getY() < wheel.getCenterY()) {
 				originAngle = -originVector.angle(1, 0);
 			} else {
 				originAngle = originVector.angle(1, 0);
 			}
-			Point2D currentVector = current.subtract(wheelShape.getCenterX(), wheelShape.getCenterY());
+			Point2D currentVector = current.subtract(wheel.getCenterX(), wheel.getCenterY());
 			double currentAngle;
-			if (current.getY() < wheelShape.getCenterY()) {
+			if (current.getY() < wheel.getCenterY()) {
 				currentAngle = -currentVector.angle(1, 0);
 			} else {
 				currentAngle = currentVector.angle(1, 0);
 			}
 			double angleDif = currentAngle - originAngle;
-			wheelAngle += angleDif;
-
-			if (angleDif > 0)
-				direction = CLOCKWISE;
-			if (angleDif < 0)
-				direction = REVERSE_CLOCKWISE;
 			if (angleDif > 180)
-				direction = REVERSE_CLOCKWISE;
-			if (angleDif < -180)
-				direction = CLOCKWISE;
-			if (direction != originDirection)
-				startAngle = Math.floor(wheelAngle);
+				angleDif -= 360;
+			else if (angleDif < -180)
+				angleDif += 360;
+			wheel.setAngle(wheel.getAngle() + angleDif);
+
+			int curDir = direction;
+			if (angleDif > 0) {
+				curDir = CLOCKWISE;
+			}
+			if (angleDif < 0) {
+				curDir = REVERSE_CLOCKWISE;
+			}
+
+			if (direction == NONE) {
+				direction = curDir;
+				powerProgress = Math.abs(angleDif) / 180;
+			} else {
+				if (curDir == direction) {
+					powerProgress += Math.abs(angleDif) / 180;
+				} else {
+					double value = powerProgress - Math.abs(angleDif) / 180;
+					if (value > 0) {
+						powerProgress = value;
+					} else if (value == 0) {
+						direction = NONE;
+						powerProgress = 0;
+					} else {
+						direction = curDir;
+						powerProgress = Math.abs(value);
+					}
+				}
+			}
 			origin = current;
 		}
 	}
 
 	private void actionMouseReleased() {
-		if (ready) {
-			long currentTime = System.nanoTime();
-			int endAngle = (int) Math.floor(wheelAngle);
-			if (Math.abs(endAngle - startAngle) < 30)
+		if (ready && direction != NONE) {
+			if (powerProgress < 0.05) {
+				powerProgress = 0;
 				return;
-			if (endAngle > startAngle) {
-				omega = (5 * DELAY * 1E6) / (currentTime - timeArray[getDegreeFromNumber(endAngle - 5)]);
-			} else {
-				omega = (5 * DELAY * 1E6) / (currentTime - timeArray[getDegreeFromNumber(endAngle + 5)]);
-			}
-			anpha = 5E-2;
+			} else if (powerProgress > 1)
+				powerProgress = 1;
+			wheel.setSpeed(5 * powerProgress);
+			wheel.setAcceleration(7E-2);
 			ready = false;
 		}
 	}
 
-}
-
-enum Pile {
-	ZERO("0"), ONE_HUNDRED("100"), TWO_HUNDRED("200"), THREE_HUNDRED("300"), FOUR_HUNDRED("400"), FIVE_HUNDRED(
-			"500"), SIX_HUNDRED("600"), SEVEN_HUNDRED("700"), EIGHT_HUNDRED("800"), NINE_HUNDRED("900"), TWO_THOUSAND(
-					"2000"), FREE_SPIN("Thêm lượt"), LOST_TURN("Mất lượt"), BANKRUPT("Mât điểm"), SURPRISE(
-							"Phần thưởng");
-
-	private String value;
-
-	Pile(String value) {
-		this.value = value;
-	}
-
-	public String getPile() {
-		return value;
-	}
 }

@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class Wheel extends Application {
+public class WheelSimulator extends Application {
 
 	private AnchorPane rootLayout;
 

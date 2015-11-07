@@ -1,5 +1,5 @@
 package com.chotoxautinh.controller;
 
-public class AppController {
+public class RootController {
 	
 }
