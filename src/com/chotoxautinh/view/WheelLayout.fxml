@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.WheelController">
+<AnchorPane prefHeight="500.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.WheelController">
    <children>
       <ProgressBar fx:id="powerBar" layoutX="14.0" layoutY="468.0" prefHeight="18.0" prefWidth="326.0" progress="0.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-      <Canvas fx:id="canvas" height="450.0" width="350.0" />
+      <Canvas fx:id="canvas" height="450.0" width="370.0" />
    </children>
 </AnchorPane>

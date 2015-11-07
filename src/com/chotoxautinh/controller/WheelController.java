@@ -45,8 +45,8 @@ public class WheelController {
 	@FXML
 	private void initialize() {
 		gc = canvas.getGraphicsContext2D();
-		wheel = new Wheel(175, 195, 350, 350);
-		arrow = new Image("file:resources/images/arrow.png", 0, 25, true, true);
+		wheel = new Wheel(185, 190, 350, 350);
+		arrow = new Image("file:resources/images/arrow1.png", 0, 32, true, true);
 		canvas.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -95,6 +95,9 @@ public class WheelController {
 	private void paint(GraphicsContext gc) {
 		clearBackground(gc);
 
+		gc.setFill(Color.YELLOWGREEN);
+		gc.fillOval(0, 5, 370, 370);
+
 		wheel.drawRotatedImage(gc);
 
 		gc.setFill(Color.BLACK);
@@ -103,7 +106,7 @@ public class WheelController {
 		gc.fillText("Curdir: " + direction, 200, 400);
 		gc.fillText("Power Progress: " + powerProgress, 200, 425);
 
-		gc.drawImage(arrow, (canvas.getWidth() - arrow.getWidth()) / 2 - 2, 0);
+		gc.drawImage(arrow, wheel.getCenterX() - arrow.getWidth() / 2 - 2, 0);
 	}
 
 	private void rotateWheel() {
