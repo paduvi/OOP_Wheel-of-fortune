@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -24,10 +25,14 @@ public class App extends Application {
 
 		// Set the application icon
 		this.primaryStage.getIcons()
-				.add(new Image("file:resources/images/10613146_1557821241104184_883503913799230125_n.jpg"));
+				.add(new Image("file:resources/images/stuff/logo.png"));
 		this.primaryStage.setResizable(false);
 		initRootLayout();
 		showMainLayout();
+	}
+	
+	public BorderPane getRootLayout(){
+		return rootLayout;
 	}
 
 	public void initRootLayout() {
@@ -35,8 +40,8 @@ public class App extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/com/chotoxautinh/view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
-
-			Scene scene = new Scene(rootLayout, 800, 625);
+			
+			Scene scene = new Scene(rootLayout, 1000, 675);
 			scene.getStylesheets().add(getClass().getResource("view/style/style.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -50,7 +55,7 @@ public class App extends Application {
 			// Load the fxml file and set into the center of the main layout
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/chotoxautinh/view/MainLayout.fxml"));
 			AnchorPane mainPage = (AnchorPane) loader.load();
-			rootLayout.setCenter(mainPage);
+			((StackPane)rootLayout.getCenter()).getChildren().add(mainPage);
 
 			// Give the controller access to the main app
 			MainController controller = loader.getController();

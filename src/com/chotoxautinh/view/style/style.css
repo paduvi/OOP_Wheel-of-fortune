@@ -1,6 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
-.mainButtonLayout .button{
+.nonFocus .button{
 	-fx-font-weight: bold;
 	-fx-focus-traversable: false;
 }
@@ -8,3 +8,4 @@
 .ruleButton{
 	-fx-focus-traversable: true;
 }
+

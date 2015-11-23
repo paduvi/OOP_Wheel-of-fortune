@@ -1,6 +1,5 @@
 package com.chotoxautinh.controller;
 
-import com.chotoxautinh.WheelSimulator;
 import com.chotoxautinh.model.Wheel;
 
 import javafx.animation.AnimationTimer;
@@ -29,7 +28,7 @@ public class WheelController {
 
 	private final long DELAY = 1000 / 60;
 	private long beforeTime;
-	private WheelSimulator mainApp;
+	
 	private Wheel wheel;
 	private Image arrow;
 	private GraphicsContext gc;
@@ -37,22 +36,25 @@ public class WheelController {
 	private Point2D origin;
 	private int direction = NONE;
 	private double powerProgress;
+	private long startTime;
+	private boolean stop;
 
-	public void setMainApp(WheelSimulator mainApp) {
-		this.mainApp = mainApp;
+	private GameController gameController;
+
+	public Wheel getWheel() {
+		return wheel;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
 	}
 
 	@FXML
 	private void initialize() {
 		gc = canvas.getGraphicsContext2D();
-		wheel = new Wheel(185, 190, 350, 350);
-		arrow = new Image("file:resources/images/arrow1.png", 0, 32, true, true);
-		canvas.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				canvas.setCursor(Cursor.OPEN_HAND);
-			}
-		});
+		wheel = new Wheel(10 + 240 / 2, 15 + 240 / 2, 240, 240);
+		arrow = new Image("file:resources/images/stuff/arrow1.png", 0, 32, true, true);
+
 		ready = true;
 		beforeTime = System.nanoTime();
 		new AnimationTimer() {
@@ -63,6 +65,8 @@ public class WheelController {
 				sleep = DELAY * 1000 - timeDiff;
 
 				if (sleep < 0) {
+					if (!ready)
+						canvas.setCursor(Cursor.DEFAULT);
 					powerBar.setProgress(powerProgress);
 					rotateWheel();
 					paint(gc);
@@ -88,23 +92,16 @@ public class WheelController {
 	}
 
 	private void clearBackground(GraphicsContext gc) {
-		gc.setFill(new Color(0.85, 0.85, 1.0, 1.0));
-		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 	}
 
 	private void paint(GraphicsContext gc) {
 		clearBackground(gc);
 
 		gc.setFill(Color.YELLOWGREEN);
-		gc.fillOval(0, 5, 370, 370);
+		gc.fillOval(0, 5, 20 + wheel.getWidth(), 20 + wheel.getHeight());
 
 		wheel.drawRotatedImage(gc);
-
-		gc.setFill(Color.BLACK);
-		gc.fillText("Omega: " + wheel.getSpeed(), 10, 400);
-		gc.fillText("Pile: " + wheel.getPile().getLabel(), 10, 425);
-		gc.fillText("Curdir: " + direction, 200, 400);
-		gc.fillText("Power Progress: " + powerProgress, 200, 425);
 
 		gc.drawImage(arrow, wheel.getCenterX() - arrow.getWidth() / 2 - 2, 0);
 	}
@@ -112,27 +109,28 @@ public class WheelController {
 	private void rotateWheel() {
 
 		powerBar.setProgress(powerProgress);
-		if (wheel.getSpeed() <= 0) {
+		if (wheel.getSpeed() <= 0 && ready == false) {
 			wheel.setSpeed(0);
 			wheel.setAcceleration(0);
-			if (ready == false) {
-				origin = null;
-				powerProgress = 0;
-				direction = NONE;
+			origin = null;
+			powerProgress = 0;
+			direction = NONE;
+			if (!stop) {
+				gameController.handleWheelFinished();
+				stop = true;
 			}
-			ready = true;
+			// ready = true;
 			return;
 		}
-		if (wheel.getAcceleration() < 0)
-			wheel.setAcceleration(-2E-2);
-		else
-			wheel.setAcceleration(wheel.getAcceleration() - 5E-4);
+		long currentTime = System.currentTimeMillis();
+		wheel.setAcceleration(wheel.getAcceleration() - Math.exp((startTime - currentTime) / 4000.0) * 3E-4);
 		wheel.setSpeed(wheel.getSpeed() + wheel.getAcceleration());
 		wheel.setAngle(wheel.getAngle() - direction * wheel.getSpeed());
 	}
 
 	private void actionMouseDragged(MouseEvent me) {
 		if (ready) {
+			canvas.setCursor(Cursor.CLOSED_HAND);
 			if (origin == null)
 				origin = new Point2D(me.getX(), me.getY());
 			Point2D current = new Point2D(me.getX(), me.getY());
@@ -196,10 +194,20 @@ public class WheelController {
 				return;
 			} else if (powerProgress > 1)
 				powerProgress = 1;
-			wheel.setSpeed(5 * powerProgress);
-			wheel.setAcceleration(7E-2);
+			wheel.setSpeed(2 + 8 * powerProgress);
+			wheel.setAcceleration(25E-3 + powerProgress * 15E-3);
+			startTime = System.currentTimeMillis();
 			ready = false;
+			stop = false;
 		}
+	}
+
+	public GameController getGameController() {
+		return gameController;
+	}
+
+	public void setGameController(GameController gameController) {
+		this.gameController = gameController;
 	}
 
 }

@@ -16,11 +16,15 @@ public class Wheel {
 	private double speed;
 	private double acceleration;
 	private List<Pile> pileList = new ArrayList<>();
+	private double width;
+	private double height;
 
 	public Wheel(double centerX, double centerY, double width, double height) {
 		this.centerX = centerX;
 		this.centerY = centerY;
-		image = new Image("file:resources/images/non.png", width, height, false, true);
+		this.setWidth(width);
+		this.setHeight(height);
+		image = new Image("file:resources/images/stuff/non.png", width, height, false, true);
 		setAngle(0);
 		Collections.addAll(pileList, Pile.FOUR_HUNDRED, Pile.TWO_THOUSAND, Pile.THREE_HUNDRED, Pile.SEVEN_HUNDRED,
 				Pile.LOST_TURN, Pile.SIX_HUNDRED, Pile.ZERO, Pile.FIVE_HUNDRED, Pile.ONE_HUNDRED, Pile.FREE_SPIN,
@@ -84,6 +88,22 @@ public class Wheel {
 
 	public void setAcceleration(double acceleration) {
 		this.acceleration = acceleration;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
 	}
 
 }

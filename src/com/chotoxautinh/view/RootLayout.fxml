@@ -9,10 +9,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="625.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.RootController">
+<BorderPane prefHeight="675.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.RootController">
    <top>
-      <MenuBar prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <MenuBar prefHeight="25.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -32,4 +31,7 @@
         </menus>
       </MenuBar>
    </top>
+   <center>
+      <StackPane prefHeight="650.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
