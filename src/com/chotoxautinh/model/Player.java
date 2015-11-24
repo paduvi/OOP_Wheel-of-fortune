@@ -5,14 +5,19 @@ public class Player {
 	private long point;
 	private long tempPoint;
 	private int left;
+	private int tempLeft;
 	private boolean winner;
 	private int index;
 
+	public Player() {
+	}
+	
 	public Player(int index) {
 		this.index = index;
 		name = "Player " + (index + 1);
 		point = 0;
 		left = 3;
+		tempLeft = 0;
 	}
 
 	public String getName() {
@@ -57,6 +62,14 @@ public class Player {
 
 	public void setWinner(boolean winner) {
 		this.winner = winner;
+	}
+
+	public int getTempLeft() {
+		return tempLeft;
+	}
+
+	public void setTempLeft(int tempLeft) {
+		this.tempLeft = tempLeft;
 	}
 
 }

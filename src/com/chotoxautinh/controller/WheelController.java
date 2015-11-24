@@ -28,7 +28,7 @@ public class WheelController {
 
 	private final long DELAY = 1000 / 60;
 	private long beforeTime;
-	
+
 	private Wheel wheel;
 	private Image arrow;
 	private GraphicsContext gc;
@@ -37,7 +37,7 @@ public class WheelController {
 	private int direction = NONE;
 	private double powerProgress;
 	private long startTime;
-	private boolean stop;
+	private boolean stop = true;
 
 	private GameController gameController;
 
@@ -55,7 +55,7 @@ public class WheelController {
 		wheel = new Wheel(10 + 240 / 2, 15 + 240 / 2, 240, 240);
 		arrow = new Image("file:resources/images/stuff/arrow1.png", 0, 32, true, true);
 
-		ready = true;
+		ready = false;
 		beforeTime = System.nanoTime();
 		new AnimationTimer() {
 			public void handle(long currentNanoTime) {
@@ -109,23 +109,24 @@ public class WheelController {
 	private void rotateWheel() {
 
 		powerBar.setProgress(powerProgress);
-		if (wheel.getSpeed() <= 0 && ready == false) {
+		if (wheel.getSpeed() <= 0) {
 			wheel.setSpeed(0);
 			wheel.setAcceleration(0);
-			origin = null;
-			powerProgress = 0;
-			direction = NONE;
-			if (!stop) {
+			if (stop == false) {
+				origin = null;
+				powerProgress = 0;
+				direction = NONE;
 				gameController.handleWheelFinished();
-				stop = true;
 			}
-			// ready = true;
+			stop = true;
 			return;
 		}
+
 		long currentTime = System.currentTimeMillis();
 		wheel.setAcceleration(wheel.getAcceleration() - Math.exp((startTime - currentTime) / 4000.0) * 3E-4);
 		wheel.setSpeed(wheel.getSpeed() + wheel.getAcceleration());
 		wheel.setAngle(wheel.getAngle() - direction * wheel.getSpeed());
+
 	}
 
 	private void actionMouseDragged(MouseEvent me) {

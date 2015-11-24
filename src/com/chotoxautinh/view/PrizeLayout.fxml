@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.PrizeController">
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" />
+      <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="250.0" />
+      <RowConstraints minHeight="10.0" prefHeight="100.0" valignment="CENTER" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="600.0" />
+   </columnConstraints>
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="609.0" text="PHẦN THƯỞNG" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="messageLabel" alignment="CENTER" prefHeight="17.0" prefWidth="600.0" text="Hãy chọn 1 phần thưởng dưới đây:" GridPane.rowIndex="1" />
+      <Button fx:id="okBtn" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#handleOk" text="OK" visible="false" GridPane.rowIndex="3" />
+      <GridPane fx:id="prizeBg" style="-fx-background-color: #2C8850;" GridPane.rowIndex="2">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;">
+               <children>
+                  <Canvas height="200.0" width="200.0" />
+                  <Button layoutX="83.0" layoutY="188.0" mnemonicParsing="false" style="-fx-background-color: #000; -fx-text-fill: #fff;" text="Mở" />
+                  <Label alignment="CENTER" layoutY="40.0" prefHeight="78.0" prefWidth="200.0" text="500 ĐIỂM" visible="false">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000; -fx-border-width: 1px 0 1px 0;" GridPane.columnIndex="1">
+               <children>
+                  <Canvas height="200.0" width="200.0" />
+                  <Button layoutX="83.0" layoutY="188.0" mnemonicParsing="false" style="-fx-background-color: #000; -fx-text-fill: #fff;" text="Mở" />
+                  <Label alignment="CENTER" layoutY="40.0" prefHeight="78.0" prefWidth="200.0" text="500 ĐIỂM" visible="false">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000;" GridPane.columnIndex="2">
+               <children>
+                  <Canvas height="200.0" width="200.0" />
+                  <Button layoutX="83.0" layoutY="188.0" mnemonicParsing="false" style="-fx-background-color: #000; -fx-text-fill: #fff;" text="Mở" />
+                  <Label alignment="CENTER" layoutY="40.0" prefHeight="78.0" prefWidth="200.0" text="500 ĐIỂM" visible="false">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>

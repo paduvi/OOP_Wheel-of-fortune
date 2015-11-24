@@ -18,6 +18,7 @@ public class MainController {
 
 	public void setMainApp(App mainApp) {
 		this.mainApp = mainApp;
+		mainApp.playSong("MainMenuThemeSong");
 	}
 
 	@FXML
@@ -28,5 +29,7 @@ public class MainController {
 
 		// Give the controller access to the main app
 		MultiPlayerGameController controller = loader.getController();
+		controller.setMainApp(mainApp);
 	}
+	
 }
