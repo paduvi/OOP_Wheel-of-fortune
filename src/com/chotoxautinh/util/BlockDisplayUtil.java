@@ -73,6 +73,7 @@ public class BlockDisplayUtil extends Application {
 				}
 				if (word.size() > capacity - 2) {
 					lineList.add(word);
+					tempX = 0;
 				} else {
 					builder.addAll(word);
 					builder.add(new Block(' '));
@@ -92,15 +93,23 @@ public class BlockDisplayUtil extends Application {
 						}
 						if (word.size() > capacity - 2) {
 							lineList.add(word);
+							tempX = 0;
 						} else {
 							builder.addAll(word);
 							builder.add(new Block(' '));
 							tempX = word.size() + 1;
 						}
-					} else {
+					} else if (word.size() > capacity - 2) {
 						lineList.add(builder);
 						builder = new LinkedList<>();
 						lineList.add(word);
+						tempX = 0;
+					} else {
+						lineList.add(builder);
+						builder = new LinkedList<>();
+						builder.addAll(word);
+						builder.add(new Block(' '));
+						tempX = word.size() + 1;
 					}
 				} else if (tempX + word.size() > capacity - 2) {
 					builder.addAll(word);
@@ -109,7 +118,7 @@ public class BlockDisplayUtil extends Application {
 				} else {
 					builder.addAll(word);
 					builder.add(new Block(' '));
-					tempX = word.size() + 1;
+					tempX += word.size() + 1;
 				}
 			}
 		}
@@ -142,7 +151,7 @@ public class BlockDisplayUtil extends Application {
 	@Override
 	public void start(Stage theStage) {
 		List<Block> blockList = new LinkedList<>();
-		String key = "VERYVERYVERYVERY LONGWORD";
+		String key = "CHO TO XAU TINH";
 		for (int i = 0; i < key.length(); i++) {
 			blockList.add(new Block(key.charAt(i)));
 		}
