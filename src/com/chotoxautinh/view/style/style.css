@@ -9,3 +9,10 @@
 	-fx-focus-traversable: true;
 }
 
+.table-cell:editable {
+    -fx-border-color: red ;
+}
+
+.table-column {
+  	-fx-alignment: center;
+}

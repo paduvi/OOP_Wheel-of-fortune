@@ -178,8 +178,9 @@ public class MultiPlayerGameController extends GameController {
 			break;
 		}
 	}
-
-	private void resetQuiz() {
+	
+	private void concludeEachRound(){
+		noRound++;
 		if (noRound < MAX_ROUND + 1) {
 			for (Player player : players) {
 				if (player.isWinner()) {
@@ -194,6 +195,9 @@ public class MultiPlayerGameController extends GameController {
 						.setText(player.getName() + " - Tổng số điểm: " + player.getPoint());
 			}
 		}
+	}
+
+	private void resetQuiz() {
 		if (noRound == MAX_ROUND) {
 			long max = players.get(0).getPoint();
 			for (Player player : players) {
@@ -328,7 +332,6 @@ public class MultiPlayerGameController extends GameController {
 			}
 		}
 		if (playerQueue.isEmpty()) {
-			noRound++;
 			quizOver();
 		} else {
 			Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ae -> {
@@ -362,13 +365,13 @@ public class MultiPlayerGameController extends GameController {
 			wheelController.setReady(true);
 			return;
 		}
-		noRound++;
 		mcSpeech.setText("Người chơi " + playerQueue.peek().getName() + " đã chiến thắng ở vòng này");
 		playerQueue.peek().setWinner(true);
 		quizOver();
 	}
 
 	private void quizOver() {
+		concludeEachRound();
 		for (Block block : blockList) {
 			block.setFaceUp(true);
 		}
@@ -384,7 +387,7 @@ public class MultiPlayerGameController extends GameController {
 	}
 
 	public void showHighScore() {
-		System.out.println("Show High Score");
+		mainApp.showHighScore("multi-player", playerQueue.peek());
 	}
 
 	@FXML

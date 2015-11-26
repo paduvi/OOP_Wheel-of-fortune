@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.QuizOverviewController">
+   <children>
+      <SplitPane dividerPositions="0.3807615230460922" layoutX="547.0" prefHeight="650.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="650.0" maxWidth="350.0" minHeight="650.0" minWidth="350.0" prefHeight="650.0" prefWidth="350.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <HBox layoutX="136.0" layoutY="536.0" spacing="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                     <children>
+                        <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSaveChanges" prefHeight="30.0" prefWidth="90.0" text="Save Changes" />
+                        <Button cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" prefHeight="30.0" prefWidth="90.0" text="Cancel" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="quizTable" focusTraversable="false" prefHeight="575.0" prefWidth="350.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="questionColumn" prefWidth="200.0" resizable="false" text="Question" />
+                      <TableColumn fx:id="answerColumn" prefWidth="150.0" resizable="false" text="Answer" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="650.0" minWidth="650.0" prefHeight="650.0" prefWidth="650.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <Label text="Quiz Detail" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <GridPane gridLinesVisible="true" layoutX="15.0" layoutY="80.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="120.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.0" minWidth="10.0" prefWidth="105.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="515.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="362.0" minHeight="10.0" prefHeight="337.0" valignment="TOP" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="63.0" valignment="TOP" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Question">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="15.0" top="15.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Answer" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="15.0" top="15.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <ScrollPane focusTraversable="false" prefViewportHeight="305.0" prefViewportWidth="500.0" GridPane.columnIndex="1">
+                           <content>
+                              <Label fx:id="questionLabel" alignment="TOP_LEFT" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" top="15.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </content>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </ScrollPane>
+                        <ScrollPane focusTraversable="false" prefViewportHeight="30.0" prefViewportWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <content>
+                              <Label fx:id="answerLabel" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="15.0" top="15.0" />
+                                 </GridPane.margin>
+                              </Label>
+                           </content>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </ScrollPane>
+                     </children>
+                  </GridPane>
+                  <HBox layoutX="435.0" layoutY="536.0" spacing="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleNewPerson" prefHeight="30.0" prefWidth="90.0" text="New Quiz" />
+                        <Button mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="30.0" prefWidth="90.0" text="Edit Quiz" />
+                        <Button mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="30.0" prefWidth="90.0" text="Delete">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -2,13 +2,24 @@ package com.chotoxautinh;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
+import com.chotoxautinh.controller.EditHighScoreController;
+import com.chotoxautinh.controller.EditQuizController;
 import com.chotoxautinh.controller.GameController;
 import com.chotoxautinh.controller.MainController;
 import com.chotoxautinh.controller.PrizeController;
+import com.chotoxautinh.controller.QuizOverviewController;
+import com.chotoxautinh.controller.RootController;
+import com.chotoxautinh.model.HighScore;
+import com.chotoxautinh.model.Player;
+import com.chotoxautinh.model.Quiz;
+import com.chotoxautinh.util.XmlUtil;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -26,6 +37,7 @@ public class App extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private MediaPlayer mediaPlayer;
+	private ObservableList<Quiz> quizData = FXCollections.observableArrayList();
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -39,6 +51,10 @@ public class App extends Application {
 		showMainLayout();
 	}
 
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
 	public BorderPane getRootLayout() {
 		return rootLayout;
 	}
@@ -48,6 +64,10 @@ public class App extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/com/chotoxautinh/view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
+
+			// Give the controller access to the main app
+			RootController controller = loader.getController();
+			controller.setMainApp(this);
 
 			Scene scene = new Scene(rootLayout, 1000, 675);
 			scene.getStylesheets().add(getClass().getResource("view/style/style.css").toExternalForm());
@@ -94,25 +114,124 @@ public class App extends Application {
 			controller.setDialogStage(dialogStage);
 
 			// Show the dialog and wait until the user closes it
-			Platform.runLater(new Runnable(){
-			    @Override
-			    public void run() {
-			    	dialogStage.showAndWait();              
-			    }           
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					dialogStage.showAndWait();
+				}
 			});
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void playSong(String filePath){
-		 String path = "resources/audio/"+filePath+".mp3";
-		 Media media = new Media(new File(path).toURI().toString());
-		 if(mediaPlayer != null)
-			 mediaPlayer.stop();
-		 mediaPlayer = new MediaPlayer(media);
-		 mediaPlayer.setAutoPlay(true);
+
+	public void showHighScore(String filePath, Player player) {
+		try {
+			playSong("applause");
+			// Load the fxml file and create a new stage for the popup.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/com/chotoxautinh/view/EditHighScoreLayout.fxml"));
+			BorderPane page = (BorderPane) loader.load();
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Phần thưởng");
+			dialogStage.getIcons()
+					.add(new Image("file:resources/images/stuff/10613146_1557821241104184_883503913799230125_n.jpg"));
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			File folder = new File(getClass().getResource("/com/chotoxautinh/savedata/").toURI());
+			ObservableList<HighScore> highScoreList = XmlUtil
+					.loadHighScoreDataFromFile(new File(folder, filePath + ".xml"));
+
+			// Set the persons into the controller.
+			EditHighScoreController controller = loader.getController();
+			controller.setDialogStage(dialogStage, highScoreList, player);
+
+			// Show the dialog and wait until the user closes it
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					dialogStage.showAndWait();
+					XmlUtil.saveHighScoreDataToFile(new File(folder, filePath + ".xml"), controller.getTableList());
+					playSong("MainMenuThemeSong");
+					((StackPane) rootLayout.getCenter()).getChildren().remove(1);
+				}
+			});
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void playSong(String filePath) {
+		String path = "resources/audio/" + filePath + ".mp3";
+		Media media = new Media(new File(path).toURI().toString());
+		if (mediaPlayer != null)
+			mediaPlayer.stop();
+		mediaPlayer = new MediaPlayer(media);
+		mediaPlayer.setAutoPlay(true);
+	}
+
+	public void showQuizOverview() {
+		try {
+			// Load the fxml file and set into the center of the main layout
+			FXMLLoader loader = new FXMLLoader(
+					getClass().getResource("/com/chotoxautinh/view/QuizOverviewLayout.fxml"));
+			AnchorPane overviewPage = (AnchorPane) loader.load();
+			((StackPane) rootLayout.getCenter()).getChildren().add(overviewPage);
+
+			File folder = new File(getClass().getResource("/com/chotoxautinh/savedata/").toURI());
+			quizData = XmlUtil.loadQuizDataFromFile(new File(folder, "quiz.xml"));
+
+			// Give the controller access to the main app
+			QuizOverviewController controller = loader.getController();
+			controller.setMainApp(this);
+
+		} catch (IOException | URISyntaxException e) {
+			// Exception gets thrown if the fxml file could not be loaded
+			e.printStackTrace();
+		}
+	}
+
+	public boolean showPersonEditDialog(Quiz quiz) {
+		try {
+			// Load the fxml file and create a new stage for the popup
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/chotoxautinh/view/EditQuizLayout.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			Stage dialogStage = new Stage();
+			// Set the application icon
+			dialogStage.getIcons()
+					.add(new Image("file:resources/images/stuff/10613146_1557821241104184_883503913799230125_n.jpg"));
+			dialogStage.setTitle("Edit Quiz");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			// Set the person into the controller
+			EditQuizController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setPerson(quiz);
+
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
+
+			return controller.isOkClicked();
+
+		} catch (IOException e) {
+			// Exception gets thrown if the fxml file could not be loaded
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public ObservableList<Quiz> getQuizData() {
+		return quizData;
 	}
 
 	public static void main(String[] args) {
