@@ -7,7 +7,7 @@ import com.chotoxautinh.model.Gift;
 public abstract class GameController {
 	public abstract void handleWheelFinished();
 
-	public abstract void handleKeyLabel();
+	public abstract void handleKeyCanvas();
 	
 	public abstract void showHighScore();
 	
@@ -18,4 +18,5 @@ public abstract class GameController {
 	public abstract List<Gift> getPrizes();
 	
 	public abstract void handlePrize(Gift gift);
+	
 }

@@ -39,7 +39,7 @@ public class EditHighScoreController {
 	public void setDialogStage(Stage dialogStage, ObservableList<HighScore> highScoreList, Player player) {
 		this.dialogStage = dialogStage;
 		HighScore obj = new HighScore(player.getName(), player.getPoint());
-		this.selectedIndex = InsertionSortUtil.getInsertionIndex(highScoreList, 5, obj);
+		this.selectedIndex = InsertionSortUtil.getInsertionIndex(highScoreList, 10, obj);
 		catalogTable.setItems(highScoreList);
 		if (selectedIndex != -1)
 			catalogTable.getSelectionModel().select(selectedIndex);

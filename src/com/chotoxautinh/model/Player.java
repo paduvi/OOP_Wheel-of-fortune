@@ -10,6 +10,11 @@ public class Player {
 	private int index;
 
 	public Player() {
+		name = "Player";
+		index = 0;
+		point = 0;
+		left = 3;
+		tempLeft = 0;
 	}
 	
 	public Player(int index) {

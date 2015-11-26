@@ -3,12 +3,9 @@ package com.chotoxautinh.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Random;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import com.chotoxautinh.App;
 import com.chotoxautinh.model.Block;
@@ -40,15 +37,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-public class MultiPlayerGameController extends GameController {
+public class EndlessGameController extends GameController {
 
-	private Queue<Player> playerQueue = new LinkedBlockingQueue<>(3);
-	private List<Player> players = new ArrayList<>();
+	private Player player = new Player();
 
 	private final long DELAY = 1000 / 60;
 	private long beforeTime;
 
-	private final int MAX_ROUND = 3;
 	private List<Block> blockList = new ArrayList<>();
 	private boolean charBtnReady = false;
 	private List<Gift> prizes;
@@ -101,9 +96,6 @@ public class MultiPlayerGameController extends GameController {
 
 	@FXML
 	private void initialize() {
-		for (int i = 0; i < 3; i++) {
-			players.add(new Player(i));
-		}
 
 		for (Node node : keyboard.getChildren()) {
 			node.addEventHandler(ActionEvent.ACTION, buttonActionHandler);
@@ -124,13 +116,8 @@ public class MultiPlayerGameController extends GameController {
 		drawTempInfo();
 	}
 
-	public MultiPlayerGameController() {
+	public EndlessGameController() {
 		prizes = new LinkedList<>();
-
-		Random r = new Random();
-		for (int i = 0; i < 3; i++) {
-			prizes.add(new Gift((r.nextInt(15) + 1) * 100));
-		}
 
 	}
 
@@ -143,17 +130,15 @@ public class MultiPlayerGameController extends GameController {
 				sleep = DELAY * 1000 - timeDiff;
 
 				if (sleep < 0) {
-					for (Player player : players) {
-						Canvas canvas = (Canvas) playerAccordion.getPanes().get(player.getIndex()).getContent();
-						GraphicsContext gc = canvas.getGraphicsContext2D();
-						gc.clearRect(0, 0, 270, 180);
-						Image avatar = new Image("file:resources/images/stuff/" + player.getIndex() + ".png", 120, 0,
-								true, true);
-						gc.drawImage(avatar, 15, 15);
+					Canvas canvas = (Canvas) playerAccordion.getPanes().get(player.getIndex()).getContent();
+					GraphicsContext gc = canvas.getGraphicsContext2D();
+					gc.clearRect(0, 0, 270, 180);
+					Image avatar = new Image("file:resources/images/stuff/" + player.getIndex() + ".png", 120, 0, true,
+							true);
+					gc.drawImage(avatar, 15, 15);
 
-						gc.fillText("Điểm vòng này: " + player.getTempPoint(), 150, 30, 120);
-						gc.fillText("Số lượt còn lại: " + (player.getLeft() + player.getTempLeft()), 150, 60, 120);
-					}
+					gc.fillText("Điểm vòng này: " + player.getTempPoint(), 150, 30, 120);
+					gc.fillText("Số lượt còn lại: " + (player.getLeft() + player.getTempLeft()), 150, 60, 120);
 
 					beforeTime = currentNanoTime;
 				}
@@ -189,61 +174,27 @@ public class MultiPlayerGameController extends GameController {
 
 	private void concludeEachRound() {
 		noRound++;
-		if (noRound < MAX_ROUND + 1) {
-			for (Player player : players) {
-				if (player.isWinner()) {
-					player.setPoint(player.getPoint() + player.getTempPoint());
-					System.out.println("ahihi");
-				}
-				player.setTempPoint(0);
-				player.setWinner(false);
-				player.setLeft(3);
-				player.setTempLeft(0);
-				playerAccordion.getPanes().get(player.getIndex())
-						.setText(player.getName() + " - Tổng số điểm: " + player.getPoint());
-			}
+		if (player.isWinner()) {
+			player.setPoint(player.getPoint() + player.getTempPoint());
+			System.out.println("ahihi");
 		}
+		player.setTempPoint(0);
+		player.setWinner(false);
+		playerAccordion.getPanes().get(player.getIndex())
+				.setText(player.getName() + " - Tổng số điểm: " + player.getPoint());
 	}
 
 	private void resetQuiz() {
+		prizes.clear();
+		Random r = new Random();
+		for (int i = 0; i < 3; i++) {
+			prizes.add(new Gift((r.nextInt(15) + 1) * 100));
+		}
 		for (Node node : keyboard.getChildren()) {
 			node.setDisable(false);
 		}
-		if (noRound == MAX_ROUND) {
-			long max = players.get(0).getPoint();
-			for (Player player : players) {
-				if (player.getPoint() > max) {
-					max = player.getPoint();
-				}
-			}
-			Iterator<Player> it = players.iterator();
-			while (it.hasNext()) {
-				if (it.next().getPoint() < max)
-					it.remove();
-			}
-		} else if (noRound > MAX_ROUND) {
-			Iterator<Player> it = players.iterator();
-			while (it.hasNext()) {
-				if (!it.next().isWinner())
-					it.remove();
-			}
-		}
-		playerQueue.clear();
-		for (int i = noRound; i < noRound + players.size(); i++) {
-			playerQueue.add(players.get(i % players.size()));
-		}
-		if (playerQueue.size() == 1) {
-			mcSpeech.setText("Chúc mừng người chơi " + playerQueue.peek().getName() + " "
-					+ "đã giành chiến thắng chung cuộc và được tham dự vào vòng đặc biệt của chương trình");
-			wheelPane.setText("Chiếc nón kỳ diệu - Vòng đặc biệt");
-		} else if (noRound > 2) {
-			mcSpeech.setText("Chúng ta sẽ đến với vòng Playoff để tìm ra người chiến thắng chung cuộc"
-					+ " tiếp tục bước vào vòng đặc biệt của chương trình");
-			wheelPane.setText("Chiếc nón kỳ diệu - Vòng Playoff");
-		} else {
-			mcSpeech.setText("Chào mừng các bạn đến với vòng thi thứ " + (noRound + 1));
-			wheelPane.setText("Chiếc nón kỳ diệu - Vòng thứ " + (noRound + 1));
-		}
+		mcSpeech.setText("Chào mừng các bạn đến với vòng thi thứ " + (noRound + 1));
+		wheelPane.setText("Chiếc nón kỳ diệu - Vòng thứ " + (noRound + 1));
 
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(4000), ae -> {
 			Quiz quiz = quizData.get(noRound);
@@ -252,7 +203,7 @@ public class MultiPlayerGameController extends GameController {
 			blockList = StringUtil.toBlockList(key);
 			keyCanvas.setHeight(BlockDisplayUtil.calculateHeight(keyCanvas.getWidth(), blockList));
 			handleKeyCanvas();
-			playerAccordion.setExpandedPane(playerAccordion.getPanes().get(playerQueue.peek().getIndex()));
+			playerAccordion.setExpandedPane(playerAccordion.getPanes().get(player.getIndex()));
 			mcSpeech.setText("Câu hỏi mà chúng tôi đặt ra là: " + quiz.getQuestion());
 			wheelController.setReady(true);
 		}));
@@ -298,55 +249,25 @@ public class MultiPlayerGameController extends GameController {
 
 	private void switchUser(boolean lostPoint) {
 		playSong("failure");
-		Player current = new Player();
-		if (playerQueue.peek().getTempLeft() > 0) {
-			current = playerQueue.peek();
-			current.setTempLeft(current.getTempLeft() - 1);
-		} else {
-			current = playerQueue.poll();
-			playerQueue.add(current);
-		}
 		if (lostPoint) {
-			current.setTempPoint(0);
+			player.setTempPoint(0);
 		}
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ae -> {
-			mcSpeech.setText("Quyền được quay thuộc về người chơi " + playerQueue.peek().getName());
-			playerAccordion.setExpandedPane(playerAccordion.getPanes().get(playerQueue.peek().getIndex()));
-			wheelController.setReady(true);
-		}));
-		timeline.play();
+		wheelController.setReady(true);
 	}
 
 	private void handleWrongPredict() {
 		playSong("wrong");
-		int tempDelay = 2000;
-		if (playerQueue.peek().getTempLeft() > 0) {
-			Player current = playerQueue.peek();
-			current.setTempLeft(current.getTempLeft() - 1);
+		int temp = player.getLeft() - 1;
+		player.setLeft(temp);
+		if (temp > 0) {
+			wheelController.setReady(true);
 		} else {
-			Player current = playerQueue.poll();
-			int temp = current.getLeft() - 1;
-			current.setLeft(temp);
-			if (temp > 0) {
-				playerQueue.add(current);
-			} else {
-				Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ae -> {
-					mcSpeech.setText("Rất tiếc người chơi " + current.getName()
-							+ " đã đoán sai 3 lần và không được tiếp tục quay trong vòng này");
-				}));
-				timeline.play();
-				tempDelay = 4000;
-			}
-		}
-		if (playerQueue.isEmpty()) {
-			quizOver();
-		} else {
-			Timeline timeline = new Timeline(new KeyFrame(Duration.millis(tempDelay), ae -> {
-				mcSpeech.setText("Quyền được quay thuộc về người chơi " + playerQueue.peek().getName());
-				playerAccordion.setExpandedPane(playerAccordion.getPanes().get(playerQueue.peek().getIndex()));
-				wheelController.setReady(true);
+			Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ae -> {
+				mcSpeech.setText("Rất tiếc người chơi " + player.getName()
+						+ " đã đoán sai 3 lần và không được tiếp tục quay trong vòng này");
 			}));
 			timeline.play();
+			quizOver();
 		}
 	}
 
@@ -356,13 +277,13 @@ public class MultiPlayerGameController extends GameController {
 		Pile pile = wheelController.getWheel().getPile();
 		switch (pile.getId()) {
 		case 10:
-			playerQueue.peek().setTempPoint(playerQueue.peek().getTempPoint() + 2000);
+			player.setTempPoint(player.getTempPoint() + 2000);
 			break;
 		case 11:
-			playerQueue.peek().setTempLeft(playerQueue.peek().getTempLeft() + 1);
+			player.setLeft(player.getLeft() + 1);
 			break;
 		default:
-			playerQueue.peek().setTempPoint(playerQueue.peek().getTempPoint() + pile.getId() * 100);
+			player.setTempPoint(player.getTempPoint() + pile.getId() * 100);
 			break;
 		}
 		for (Block block : blockList) {
@@ -372,8 +293,8 @@ public class MultiPlayerGameController extends GameController {
 			wheelController.setReady(true);
 			return;
 		}
-		mcSpeech.setText("Người chơi " + playerQueue.peek().getName() + " đã chiến thắng ở vòng này");
-		playerQueue.peek().setWinner(true);
+		mcSpeech.setText("Người chơi " + player.getName() + " đã chiến thắng ở vòng này");
+		player.setWinner(true);
 		quizOver();
 	}
 
@@ -384,7 +305,7 @@ public class MultiPlayerGameController extends GameController {
 		}
 		handleKeyCanvas();
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ae -> {
-			if (players.size() > 1) {
+			if (player.getLeft() > 0) {
 				mcSpeech.setText("Bấm vào nút 'Next Stage' để tiếp tục");
 				nextBtn.setVisible(true);
 			} else
@@ -394,7 +315,7 @@ public class MultiPlayerGameController extends GameController {
 	}
 
 	public void showHighScore() {
-		mainApp.showHighScore("multi-player", players.get(0));
+		mainApp.showHighScore("endless-game", player);
 	}
 
 	@FXML
@@ -405,7 +326,7 @@ public class MultiPlayerGameController extends GameController {
 
 	@Override
 	public void handlePrize(Gift gift) {
-		playerQueue.peek().setTempPoint(playerQueue.peek().getTempPoint() + gift.getBonusPoint());
+		player.setTempPoint(player.getTempPoint() + gift.getBonusPoint());
 	}
 
 }

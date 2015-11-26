@@ -62,7 +62,7 @@
                         </Label>
                         <ScrollPane focusTraversable="false" prefViewportHeight="305.0" prefViewportWidth="500.0" GridPane.columnIndex="1">
                            <content>
-                              <Label fx:id="questionLabel" alignment="TOP_LEFT" GridPane.columnIndex="1">
+                              <Label fx:id="questionLabel" alignment="TOP_LEFT" prefHeight="315.0" prefWidth="485.0" wrapText="true" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets left="15.0" top="15.0" />
                                  </GridPane.margin>
@@ -80,7 +80,7 @@
                         </ScrollPane>
                         <ScrollPane focusTraversable="false" prefViewportHeight="30.0" prefViewportWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <content>
-                              <Label fx:id="answerLabel" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Label fx:id="answerLabel" prefHeight="35.0" prefWidth="485.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

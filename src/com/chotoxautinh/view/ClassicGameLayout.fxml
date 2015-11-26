@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.MultiPlayerGameController">
+<BorderPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.ClassicGameController">
    <center>
       <AnchorPane maxHeight="650.0" maxWidth="730.0" prefHeight="650.0" prefWidth="730.0" BorderPane.alignment="CENTER">
          <children>
@@ -20,17 +20,6 @@
                </image>
             </ImageView>
             <GridPane prefWidth="730.0" style="-fx-background-color: rgba(0,0,0,0.4);">
-               <children>
-                  <Label fx:id="questionLabel" alignment="CENTER" layoutX="-14.0" prefWidth="720.0" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </Label>
-                  <Canvas fx:id="keyCanvas" width="720.0" GridPane.rowIndex="1" />
-               </children>
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
@@ -38,8 +27,37 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
+               <children>
+                  <Label fx:id="questionLabel" alignment="CENTER" layoutX="-14.0" prefWidth="720.0" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Canvas fx:id="keyCanvas" width="720.0" GridPane.rowIndex="1" />
+               </children>
             </GridPane>
-            <GridPane fx:id="keyboard" maxHeight="212.0" maxWidth="730.0" prefHeight="212.0" prefWidth="730.0" style="-fx-background-color: #CCC;" styleClass="nonFocus" AnchorPane.bottomAnchor="0.0">
+            <GridPane fx:id="keyboard" layoutY="438.0" maxHeight="212.0" maxWidth="730.0" prefHeight="212.0" prefWidth="730.0" style="-fx-background-color: #CCC;" styleClass="nonFocus" AnchorPane.bottomAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
                   <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="Q" GridPane.rowIndex="1">
                      <font>
@@ -227,24 +245,6 @@
                      </font>
                   </Button>
                </children>
-               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-               </rowConstraints>
             </GridPane>
          </children>
       </AnchorPane>
@@ -268,17 +268,7 @@
           </TitledPane>
             <Accordion fx:id="playerAccordion" disable="true" layoutY="206.0" prefWidth="270.0">
               <panes>
-                <TitledPane expanded="false" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="270.0" text="Player 1">
-                  <content>
-                        <Canvas height="150.0" width="270.0" />
-                  </content>
-                </TitledPane>
-                <TitledPane expanded="false" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="270.0" text="Player 2">
-                  <content>
-                        <Canvas height="150.0" width="270.0" />
-                  </content>
-                </TitledPane>
-                <TitledPane expanded="false" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="270.0" text="Player 3">
+                <TitledPane expanded="false" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="270.0" text="Player">
                   <content>
                         <Canvas height="150.0" width="270.0" />
                   </content>

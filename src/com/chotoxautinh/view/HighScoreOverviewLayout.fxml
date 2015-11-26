@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.chotoxautinh.controller.HighScoreOverviewController">
+   <children>
+      <TabPane layoutY="48.0" prefHeight="309.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+        <tabs>
+          <Tab text="Classic Mode">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="classicTable" layoutY="6.0" prefHeight="280.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="classicPlaceCol" prefWidth="50.0" resizable="false" text="Place" />
+                            <TableColumn fx:id="classicNameCol" prefWidth="175.0" resizable="false" text="Name" />
+                              <TableColumn fx:id="classicScoreCol" prefWidth="175.0" resizable="false" text="Score" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Endless Mode">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="endlessTable" prefHeight="280.0" prefWidth="400.0">
+                           <columns>
+                              <TableColumn fx:id="endlessPlaceCol" prefWidth="50.0" resizable="false" text="Place" />
+                              <TableColumn fx:id="endlessNameCol" prefWidth="175.0" resizable="false" text="Name" />
+                              <TableColumn fx:id="endlessScoreCol" prefWidth="175.0" resizable="false" text="Score" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Multi Player">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="multiTable" prefHeight="280.0" prefWidth="400.0">
+                           <columns>
+                              <TableColumn fx:id="multiPlaceCol" prefWidth="50.0" resizable="false" text="Place" />
+                              <TableColumn fx:id="multiNameCol" prefWidth="175.0" resizable="false" text="Name" />
+                              <TableColumn fx:id="multiScoreCol" prefWidth="175.0" resizable="false" text="Score" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="132.0" layoutY="13.0" text="HIGH SCORE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button defaultButton="true" layoutX="184.0" layoutY="367.0" mnemonicParsing="false" onAction="#okHandle" text="OK" />
+   </children>
+</AnchorPane>

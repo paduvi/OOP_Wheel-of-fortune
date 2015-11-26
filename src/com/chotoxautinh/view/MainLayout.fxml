@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-image: url('file:resources/images/stuff/background.png');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.MainController">
    <children>
-      <ImageView focusTraversable="true" pickOnBounds="true" preserveRatio="true" styleClass="ruleButton" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="24.0">
+      <ImageView focusTraversable="true" onMouseClicked="#handleIntro" pickOnBounds="true" preserveRatio="true" styleClass="ruleButton" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="24.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -20,12 +20,12 @@
       </ImageView>
       <VBox alignment="CENTER" layoutX="648.0" layoutY="193.0" prefHeight="330.0" prefWidth="290.0" spacing="29.0" styleClass="nonFocus">
          <children>
-            <Button defaultButton="true" focusTraversable="false" mnemonicParsing="false" opacity="0.7" prefHeight="47.0" prefWidth="220.0" text="CLASSIC MODE">
+            <Button defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#handleClassicModeButton" opacity="0.7" prefHeight="47.0" prefWidth="220.0" text="CLASSIC MODE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button defaultButton="true" focusTraversable="false" mnemonicParsing="false" opacity="0.7" prefHeight="47.0" prefWidth="220.0" text="ENDLESS MODE">
+            <Button defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#handleEndlessModeButton" opacity="0.7" prefHeight="47.0" prefWidth="220.0" text="ENDLESS MODE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

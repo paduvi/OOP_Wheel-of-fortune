@@ -1,8 +1,5 @@
 package com.chotoxautinh.controller;
 
-import java.io.File;
-import java.net.URISyntaxException;
-
 import com.chotoxautinh.App;
 import com.chotoxautinh.model.Quiz;
 import com.chotoxautinh.util.XmlUtil;
@@ -10,10 +7,10 @@ import com.chotoxautinh.util.XmlUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.StackPane;
 
 public class QuizOverviewController {
 	@FXML
@@ -138,20 +135,14 @@ public class QuizOverviewController {
 	}
 
 	private void closeStage() {
-		((StackPane) mainApp.getRootLayout().getCenter()).getChildren().remove(1);
+		while (((StackPane) mainApp.getRootLayout().getCenter()).getChildren().size() > 1)
+			((StackPane) mainApp.getRootLayout().getCenter()).getChildren().remove(1);
 	}
 
 	@FXML
 	private void handleSaveChanges() {
-		try {
-			File folder = new File(getClass().getResource("/com/chotoxautinh/savedata/").toURI());
-			XmlUtil.saveQuizDataToFile(new File(folder, "quiz.xml"), mainApp.getQuizData());
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			closeStage();
-		}
+		XmlUtil.saveQuizDataToFile(mainApp.getQuizData());
+		closeStage();
 	}
 
 	@FXML

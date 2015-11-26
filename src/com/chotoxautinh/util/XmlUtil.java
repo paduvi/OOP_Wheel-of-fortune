@@ -1,6 +1,7 @@
 package com.chotoxautinh.util;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -17,6 +18,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class XmlUtil {
+	
+	private static File getFolder() throws URISyntaxException{
+		return new File(XmlUtil.class.getResource("/com/chotoxautinh/savedata/").toURI());
+	}
 
 	public static ObservableList<HighScore> loadHighScoreDataFromFile(File file) {
 		ObservableList<HighScore> highScoreList = FXCollections.observableArrayList();
@@ -55,10 +60,11 @@ public class XmlUtil {
 		}
 	}
 
-	public static ObservableList<Quiz> loadQuizDataFromFile(File file) {
+	public static ObservableList<Quiz> loadQuizDataFromFile() {
 		ObservableList<Quiz> quizList = FXCollections.observableArrayList();
 		JAXBContext context;
 		try {
+			File file = new File(getFolder(), "quiz.xml");
 			context = JAXBContext.newInstance(QuizListWrapper.class);
 			Unmarshaller um = context.createUnmarshaller();
 
@@ -70,13 +76,16 @@ public class XmlUtil {
 
 		} catch (JAXBException e) {
 			System.err.println("File not valid");
+		} catch (URISyntaxException e) {
+			System.err.println("Folder not found");
 		}
 		return quizList;
 	}
 
-	public static void saveQuizDataToFile(File file, List<Quiz> quizList) {
+	public static void saveQuizDataToFile(List<Quiz> quizList) {
 		JAXBContext context;
 		try {
+			File file = new File(getFolder(), "quiz.xml");
 			context = JAXBContext.newInstance(QuizListWrapper.class);
 			Marshaller m = context.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -89,6 +98,8 @@ public class XmlUtil {
 			m.marshal(wrapper, file);
 		} catch (JAXBException e) {
 			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			System.err.println("Folder not found");
 		}
 	}
 }

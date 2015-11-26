@@ -119,10 +119,11 @@ public class RootController {
 	private void mainMenuHandle() {
 		if (((StackPane) mainApp.getRootLayout().getCenter()).getChildren().size() > 1) {
 			mainApp.playSong("MainMenuThemeSong");
-			((StackPane) mainApp.getRootLayout().getCenter()).getChildren().remove(1);
+			while (((StackPane) mainApp.getRootLayout().getCenter()).getChildren().size() > 1)
+				((StackPane) mainApp.getRootLayout().getCenter()).getChildren().remove(1);
 		}
 	}
-	
+
 	@FXML
 	private void handleExit() {
 		System.exit(0);
@@ -135,10 +136,20 @@ public class RootController {
 		String header = "Bộ môn Lập trình hướng đối tượng - TS. Cao Tuấn Dũng"
 				+ "\nMã đề DE11A: Chương trình Chiếc nón kì diệu";
 		alert.setHeaderText(header);
-		String content = "Danh sách thành viên Nhóm 5 - KSTN CNTT K58: \n" + "- Phan Đức Việt\n" + "- La Văn Quân\n"
+		String content = "Danh sách thành viên Nhóm 7 - KSTN CNTT K58: \n" + "- Phan Đức Việt\n" + "- La Văn Quân\n"
 				+ "- Lương Xuân Tiến";
 		alert.setContentText(content);
 
 		alert.showAndWait();
+	}
+	
+	@FXML
+	private void handleHighScoreView() {
+		mainApp.showHighScoreView();
+	}
+	
+	@FXML
+	private void handleIntroduce(){
+		mainApp.showIntro();
 	}
 }

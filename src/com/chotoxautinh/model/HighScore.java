@@ -40,7 +40,7 @@ public class HighScore {
 		return point.get();
 	}
 
-	public void setPoint(int point) {
+	public void setPoint(long point) {
 		this.point.set(point);
 	}
 

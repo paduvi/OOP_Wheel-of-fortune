@@ -1,5 +1,8 @@
 package com.chotoxautinh.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Block {
 	private String character;
 	private boolean space;
@@ -10,7 +13,7 @@ public class Block {
 			space = true;
 			faceUp = true;
 		} else {
-			this.character = String.valueOf(character).toUpperCase();
+			this.character = String.valueOf(character);
 			faceUp = false;
 		}
 	}

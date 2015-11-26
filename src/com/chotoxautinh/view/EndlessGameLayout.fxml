@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.MultiPlayerGameController">
+<BorderPane prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chotoxautinh.controller.EndlessGameController">
    <center>
       <AnchorPane maxHeight="650.0" maxWidth="730.0" prefHeight="650.0" prefWidth="730.0" BorderPane.alignment="CENTER">
          <children>
@@ -39,212 +39,212 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <GridPane fx:id="keyboard" maxHeight="212.0" maxWidth="730.0" prefHeight="212.0" prefWidth="730.0" style="-fx-background-color: #CCC;" styleClass="nonFocus" AnchorPane.bottomAnchor="0.0">
+            <GridPane fx:id="keyboard" layoutY="438.0" maxHeight="212.0" maxWidth="730.0" prefHeight="212.0" prefWidth="730.0" style="-fx-background-color: #CCC;" styleClass="nonFocus">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="Q" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="A" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="W" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="B" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="E" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="C" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="R" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="D" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="T" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="E" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="Y" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="F" GridPane.columnIndex="5" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="U" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="G" GridPane.columnIndex="6" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="I" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="H" GridPane.columnIndex="7" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="O" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="I" GridPane.columnIndex="8" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="A" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="K" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="S" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="L" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="D" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="M" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="F" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="N" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="G" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="O" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="H" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="P" GridPane.columnIndex="5" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="J" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="Q" GridPane.columnIndex="6" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="K" GridPane.columnIndex="8" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="R" GridPane.columnIndex="7" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="L" GridPane.columnIndex="9" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="S" GridPane.columnIndex="8" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="." GridPane.columnIndex="9" GridPane.rowIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="T" GridPane.columnIndex="9" GridPane.rowIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="Z" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="U" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="X" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="V" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="C" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="W" GridPane.columnIndex="4" GridPane.rowIndex="3">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="V" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="X" GridPane.columnIndex="5" GridPane.rowIndex="3">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="B" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="Y" GridPane.columnIndex="6" GridPane.rowIndex="3">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="N" GridPane.columnIndex="7" GridPane.rowIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="Z" GridPane.columnIndex="7" GridPane.rowIndex="3">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="P" GridPane.columnIndex="9" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="J" GridPane.columnIndex="9" GridPane.rowIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="0">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="2" GridPane.columnIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="1" GridPane.columnIndex="1">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="3" GridPane.columnIndex="2">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="2" GridPane.columnIndex="2">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="4" GridPane.columnIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="3" GridPane.columnIndex="3">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="5" GridPane.columnIndex="4">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="4" GridPane.columnIndex="4">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="6" GridPane.columnIndex="5">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="5" GridPane.columnIndex="5">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="7" GridPane.columnIndex="6">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="6" GridPane.columnIndex="6">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="8" GridPane.columnIndex="7">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="7" GridPane.columnIndex="7">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="9" GridPane.columnIndex="8">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="8" GridPane.columnIndex="8">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="0" GridPane.columnIndex="9">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="9" GridPane.columnIndex="9">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="M" GridPane.columnIndex="8" GridPane.rowIndex="3">
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" text="." GridPane.columnIndex="8" GridPane.rowIndex="3">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
                   </Button>
                </children>
-               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-               </rowConstraints>
             </GridPane>
          </children>
       </AnchorPane>
@@ -268,17 +268,7 @@
           </TitledPane>
             <Accordion fx:id="playerAccordion" disable="true" layoutY="206.0" prefWidth="270.0">
               <panes>
-                <TitledPane expanded="false" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="270.0" text="Player 1">
-                  <content>
-                        <Canvas height="150.0" width="270.0" />
-                  </content>
-                </TitledPane>
-                <TitledPane expanded="false" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="270.0" text="Player 2">
-                  <content>
-                        <Canvas height="150.0" width="270.0" />
-                  </content>
-                </TitledPane>
-                <TitledPane expanded="false" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="270.0" text="Player 3">
+                <TitledPane expanded="false" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="270.0" text="Player">
                   <content>
                         <Canvas height="150.0" width="270.0" />
                   </content>
