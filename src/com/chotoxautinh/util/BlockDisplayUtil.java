@@ -151,7 +151,7 @@ public class BlockDisplayUtil extends Application {
 	@Override
 	public void start(Stage theStage) {
 		List<Block> blockList = new LinkedList<>();
-		String key = "CHO TO XAU TINH";
+		String key = "PADUVI CHOTOXAUTINH";
 		for (int i = 0; i < key.length(); i++) {
 			blockList.add(new Block(key.charAt(i)));
 		}
@@ -162,7 +162,9 @@ public class BlockDisplayUtil extends Application {
 		canvas.setWidth(720);
 		canvas.setHeight(BlockDisplayUtil.calculateHeight(canvas.getWidth(), blockList));
 		paint(canvas, blockList);
-		theStage.setTitle("Bounce Ball");
+		theStage.setTitle("Chán đời");
+		theStage.getIcons()
+				.add(new Image("file:resources/images/stuff/10613146_1557821241104184_883503913799230125_n.jpg"));
 
 		Group root = new Group();
 		Scene theScene = new Scene(root);
